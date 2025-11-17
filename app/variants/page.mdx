@@ -1,0 +1,201 @@
+---
+title: Variants
+---
+
+import { twux } from "twux";
+import { theme } from "@/src/theme";
+
+# Variants
+
+Twux supports both **option** and **boolean** variants.
+
+- **<a href="#option-variants" className="underline">Option Variants</a>**: When you need to select from a set of predefined values.
+- **<a href="#boolean-variants" className="underline">Boolean Variants</a>**: When you need to toggle a class on or off using a boolean prop.
+
+Twux supports **<a href="#default-variant-values" className="underline">Default Values</a>** for variant props.
+
+## Option Variants
+
+Option variants are used when you want to select from a set of predefined Tailwind classes.
+
+Provide an object as the second argument to `twux` to describe the variant props your component should support.
+
+Each key under the variants object (`style`, `size`) becomes a prop on the resulting component, and each nested key (`primary`, `danger`, `sm`, `md`, `lg`) maps to the Tailwind classes that should be applied when that value is selected.
+
+```tsx
+import { twux } from "twux";
+
+const MyButton = twux(
+  "text-white rounded-md p-2",
+  {
+    style: {
+      primary: "bg-blue-500 hover:bg-blue-600",
+      danger: "bg-red-500 hover:bg-red-600",
+    },
+    size: {
+      sm: "text-sm",
+      md: "text-base",
+      lg: "text-lg",
+    },
+  },
+  "button"
+);
+
+export function Example() {
+  return (
+    <>
+      <MyButton style="primary" size="sm">
+        Save
+      </MyButton>
+      <MyButton style="primary" size="md">
+        Save
+      </MyButton>
+      <MyButton style="danger" size="md">
+        Delete
+      </MyButton>
+      <MyButton style="danger" size="lg">
+        Delete
+      </MyButton>
+    </>
+  );
+}
+```
+
+export const MyButton = twux(
+  "text-white rounded-md p-2",
+  {
+    style: {
+      primary: "bg-blue-500 hover:bg-blue-600",
+      danger: "bg-red-500 hover:bg-red-600",
+    },
+    size: {
+      sm: "text-sm",
+      md: "text-base",
+      lg: "text-lg",
+    },
+  },
+  "button"
+);
+
+<theme.preview>
+  <div className="flex flex-wrap items-center gap-2">
+    <MyButton style="primary" size="sm">
+      Save
+    </MyButton>
+    <MyButton style="primary" size="md">
+      Save
+    </MyButton>
+    <MyButton style="danger" size="md">
+      Delete
+    </MyButton>
+    <MyButton style="danger" size="lg">
+      Delete
+    </MyButton>
+  </div>
+</theme.preview>
+
+Twux enforces that required variant props are present and valid. If a required variant prop is missing or invalid, you will see a type error.
+
+```tsx
+function Form() {
+  return (
+    <div>
+      {/* Type error: the style prop is required */}
+      <MyButton size="md">Missing required variant</MyButton>
+    </div>
+  );
+}
+```
+
+## Boolean Variants
+
+Boolean variants are used when you want to toggle a class on or off using a boolean prop.
+
+Provide an object as the second argument to `twux` to describe the variant props your component should support.
+
+Each key under the variants object (`dazzle`) becomes a prop on the resulting component, and the value (`true` or `false`) maps to the Tailwind classes that should be applied when that value is selected.
+
+```tsx
+const MyParagraph = twux(
+  "text-gray-800 leading-relaxed",
+  {
+    dazzle: "text-xl font-semibold italic text-purple-600",
+  },
+  "p"
+);
+
+export function BooleanVariantsExample() {
+  return (
+    <>
+      <MyParagraph>This paragraph uses the base styles.</MyParagraph>
+      <MyParagraph dazzle>Dazzling paragraph!</MyParagraph>
+    </>
+  );
+}
+```
+
+export const MyParagraph = twux(
+  "text-gray-800 leading-relaxed",
+  {
+    dazzle: "text-xl font-semibold italic text-purple-600",
+  },
+  "p"
+);
+
+export function BooleanVariantsExample() {
+  return (
+    <>
+      <MyParagraph>This paragraph uses the base styles.</MyParagraph>
+      <MyParagraph dazzle>Dazzling paragraph!</MyParagraph>
+    </>
+  );
+}
+
+<theme.preview>
+  <BooleanVariantsExample />
+</theme.preview>
+
+## Provide Default Variants
+
+Use a third object argument to supply default values for your variants. Defaults make a prop optional while still applying the corresponding classes.
+
+```tsx
+const MyButton = twux(
+  "inline-flex items-center gap-2 rounded-md px-4 py-2 font-medium text-white transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2",
+  {
+    style: {
+      primary: "bg-blue-500 hover:bg-blue-600 focus:ring-blue-500",
+      danger: "bg-red-500 hover:bg-red-600 focus:ring-red-500",
+    },
+    size: {
+      sm: "text-sm",
+      md: "text-base",
+      lg: "text-lg",
+    },
+  },
+  {
+    style: "primary",
+    size: "md",
+  },
+  "button"
+);
+```
+
+With defaults in place you can omit a variant prop, and Twux will apply the fallback value and its classes automatically.
+
+### Default Boolean Variants
+
+Combine boolean variants with the defaults object to turn a flag on by default.
+
+```tsx
+const MyParagraph = twux(
+  "text-gray-800 leading-relaxed",
+  {
+    dazzle: "text-xl font-semibold italic text-purple-600",
+  },
+  {
+    dazzle: true,
+  },
+  "p"
+);
+```

@@ -1,0 +1,63 @@
+---
+title: Getting Started
+---
+
+import { twux } from "twux";
+import { Playground } from "nextra/components";
+import { theme } from "@/src/theme";
+
+# Getting started
+
+## Install Twux
+
+First add `twux` to your project
+
+```bash
+# npm
+npm install twux
+
+# yarn
+yarn add twux
+
+# pnpm
+pnpm add twux
+```
+
+## Basic Usage
+
+Once `twux` is installed, you can start using it to create your own components.
+
+```tsx
+import { twux } from "twux";
+
+const MyButton = twux(
+  "text-white bg-blue-500 hover:bg-blue-600 p-2 rounded-md",
+  "button"
+);
+
+function Example() {
+  return <MyButton>Click me!</MyButton>;
+}
+```
+
+export const MyButton = twux(
+  "text-white bg-blue-500 hover:bg-blue-600 p-2 rounded-md",
+  "button"
+);
+
+<theme.preview>
+  <MyButton>Click me!</MyButton>
+</theme.preview>
+
+#### Arguments
+
+In its most basic form, `twux` takes two arguments:
+
+- The **first** `className` argument is the Tailwind classes to be applied to the component.
+- The **last** `tagName` argument is the HTML element name to be used for the component.
+
+#### Notes
+
+- **Type Safety**: The `MyButton` component is properly typed to have the props from an HTML element based on the `tagName`.
+
+- **Class Name Overriding**: When using the `MyButton` component, you can pass in your own `className` and conflicting Tailwind classes will be automatically overridden.
