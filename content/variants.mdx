@@ -7,12 +7,12 @@ import { theme } from "@/src/theme";
 
 # Variants
 
-Twux supports both **option** and **boolean** variants.
+Twux supports **option** and **boolean** variants.
 
-- **<a href="#option-variants" className="underline">Option Variants</a>**: When you need to select from a set of predefined values.
-- **<a href="#boolean-variants" className="underline">Boolean Variants</a>**: When you need to toggle a class on or off using a boolean prop.
+- **<a href="#option-variants" className="underline">Option Variants</a>**: Select from a list of predefined options.
+- **<a href="#boolean-variants" className="underline">Boolean Variants</a>**: Toggle a class on or off using a boolean prop.
 
-Twux supports **<a href="#default-variant-values" className="underline">Default Values</a>** for variant props.
+Twux also supports **<a href="#default-values" className="underline">default values</a>** for variant props. When a value isn't provided for a variant, the default value is used.
 
 ## Option Variants
 
@@ -155,9 +155,11 @@ export function BooleanVariantsExample() {
   <BooleanVariantsExample />
 </theme.preview>
 
-## Provide Default Variants
+## Default Values
 
-Use a third object argument to supply default values for your variants. Defaults make a prop optional while still applying the corresponding classes.
+You can add a third object argument to supply default values for your variants.
+
+When a value isn't provided for a variant, the default value is used.
 
 ```tsx
 const MyButton = twux(
@@ -173,6 +175,7 @@ const MyButton = twux(
       lg: "text-lg",
     },
   },
+  // Default values go here
   {
     style: "primary",
     size: "md",

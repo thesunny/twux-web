@@ -1,0 +1,325 @@
+---
+title: Hello
+---
+
+# Tailwind User Experience
+
+Twux is a simple and powerful way to build re-usable type-safe React components
+with Tailwind in a 2.5 KB library.
+
+### Basic Usage
+
+```tsx
+const Button = twux("text-white bg-blue-500", "button");
+```
+
+import { twux } from "twux";
+
+export const Button = twux("text-white bg-blue-500 p-2 rounded", "button");
+
+export const $table = twux("table-auto w-full my-4", "table");
+export const $tbody = twux("", "tbody");
+export const $tr = twux("", "tr");
+export const $td = twux("pr-4 pb-2 w-1/2", "td");
+
+Usage:
+
+<$table>
+  <$tbody>
+
+<$tr>
+      <$td>
+
+{/* prettier-ignore */}
+```tsx
+<Button>
+  Click me!
+</Button>
+```
+
+      </$td>
+      <$td>
+        <Button>Click me!</Button>
+      </$td>
+    </$tr>
+
+<$tr>
+      <$td>
+
+{/* prettier-ignore */}
+```tsx
+// Override a default Tailwind class
+<Button className="bg-gray-500">
+  Click me!
+</Button>
+```
+
+      </$td>
+      <$td>
+        <Button className="bg-gray-500">Click me!</Button>
+      </$td>
+    </$tr>
+
+</$tbody>
+</$table>
+
+### Variants
+
+Twux supports variants of components by providing an `object` as the second argument.
+
+```tsx
+const VariantButton = twux(
+  "text-white p-2 rounded",
+  {
+    // color variant with two options
+    color: {
+      primary: "bg-blue-500",
+      danger: "bg-red-500",
+    },
+    // size variant with three options
+    size: {
+      sm: "text-sm",
+      md: "text-base",
+      lg: "text-lg",
+    },
+  },
+  "button"
+);
+```
+
+export const VariantButton = twux(
+  "text-white p-2 rounded",
+  {
+    color: {
+      primary: "bg-blue-500",
+      gray: "bg-gray-500",
+    },
+    size: {
+      sm: "text-sm",
+      md: "text-base",
+      lg: "text-lg",
+    },
+  },
+  "button"
+);
+
+Usage:
+
+<$table>
+<$tbody>
+<$tr>
+<$td>
+
+{/* prettier-ignore */}
+```tsx
+<VariantButton color="primary" size="md">
+  Medium Primary Button
+</VariantButton>
+```
+
+</$td>
+<$td>
+
+  <VariantButton color="primary" size="md">Medium Primary Button</VariantButton>
+</$td>
+</$tr>
+<$tr>
+<$td>
+
+{/* prettier-ignore */}
+```tsx
+<VariantButton color="gray" size="sm">
+  Small Gray Button
+</VariantButton>
+```
+
+</$td>
+<$td>
+
+  <VariantButton color="gray" size="sm">Small Gray Button</VariantButton>
+</$td>
+</$tr>
+
+</$tbody>
+</$table>
+
+Twux also supports [default values for a variant](./variants#default-values) to make a variant prop optional while still applying the corresponding classes.
+
+### Boolean Variants
+
+Twux also supports boolean variants by providing a `string` value for each variant instead of an `object`.
+
+```tsx
+const BooleanButton = twux(
+  "text-white p-2 rounded bg-blue-500",
+  {
+    bold: "font-bold",
+    italic: "italic",
+  },
+  "button"
+);
+```
+
+export const BooleanButton = twux(
+  "text-white p-2 rounded bg-blue-500",
+  {
+    bold: "font-bold",
+    italic: "italic",
+  },
+  "button"
+);
+
+Usage:
+
+<$table>
+<$tbody>
+<$tr>
+<$td>
+
+{/* prettier-ignore */}
+```tsx
+<BooleanButton bold>
+  Bold Button
+</BooleanButton>
+```
+
+</$td>
+<$td>
+
+  <BooleanButton bold>Bold Button</BooleanButton>
+</$td>
+</$tr>
+
+<$tr>
+<$td>
+
+{/* prettier-ignore */}
+```tsx
+<BooleanButton italic>
+  Italic Button
+</BooleanButton>
+```
+
+</$td>
+<$td>
+
+  <BooleanButton italic>Italic Button</BooleanButton>
+</$td>
+</$tr>
+
+</$tbody>
+</$table>
+
+Note: Boolean variants and option variants can be mixed and matched.
+
+### Function Components
+
+Twux can be used with function components by passing a function as the final argument.
+
+```tsx
+import { twux } from "twux";
+
+const Chip = twux(
+  "text-xs bg-orange-600 text-white rounded-full px-2 py-1 inline-block",
+  ({ className, text }: { className: string; text: string }) => {
+    return <span className={className}>{text}</span>;
+  }
+);
+```
+
+Usage:
+
+export const Chip = twux(
+  "text-xs bg-orange-600 text-white rounded-full px-2 py-1 inline-block",
+  ({ className, text }) => {
+    return <span className={className}>{text}</span>;
+  }
+);
+
+<$table>
+<$tbody>
+<$tr>
+<$td>
+
+{/* prettier-ignore */}
+```tsx
+<Chip text="This is a chip" />
+```
+
+</$td>
+<$td>
+
+  <Chip text="This is a chip" />
+</$td>
+</$tr>
+
+</$tbody>
+</$table>
+
+### Enhance Existing Function Components
+
+Twux can also be used with existing function component by passing the function as the final argument.
+
+```tsx
+function Label({ className, text }) {
+  return <span className={className}>{text}</span>;
+}
+
+const StyledLabel = twux(
+  "text-xs bg-gray-100 px-2 py-1 inline-block rounded",
+  Label
+);
+```
+
+export function Label({ className, text }) {
+  return <span className={className}>{text}</span>;
+}
+
+export const StyledLabel = twux(
+  "text-xs bg-gray-100 px-2 py-1 inline-block rounded",
+  Label
+);
+
+Usage:
+
+<$table>
+<$tbody>
+<$tr>
+<$td>
+
+{/* prettier-ignore */}
+```tsx
+<StyledLabel text="This is a styled label" />
+```
+
+</$td>
+<$td>
+
+  <StyledLabel text="This is a styled label" />
+</$td>
+</$tr>
+
+</$tbody>
+</$table>
+
+### Learn More...
+
+And is easy to compose into mini libraries...
+
+```tsx
+const MyForm = {
+  Button: twux("text-white bg-blue-500", "button"),
+  Input: twux("border text-sm", "input"),
+  Group: twux("p-4", "div"),
+};
+```
+
+Automatically handles
+
+- Tailwind `className` merging with `tailwind-merge`
+- Adding `forwardRef` to components
+
+Everything is TypeScript first
+
+- Creates HTML based components with typed `props` based on the tag name like `button` so you don't have to remember to type `(props: React.ButtonHTMLAttributes<HTMLButtonElemeent>)`
+- Extracts and uses typed `props` from Function Components

@@ -1,0 +1,56 @@
+# Building Component Libraries
+
+### Simple Component Libraries
+
+Building basic component libraries with Twux is easy...
+
+```tsx
+const theme = {
+  button: twux("text-white bg-blue-500 p-2 rounded", "button"),
+  title: twux("text-2xl font-bold", "h1"),
+};
+```
+
+Usage:
+
+```tsx
+<theme.button>Click me!</theme.button>
+<theme.title>Hello World</theme.title>
+```
+
+### Best Practices for Most Component Libraries
+
+For most component libraries that will be re-used through a project, we
+recommend the following pattern for easier management...
+
+- Create one file to export components.
+- Create a second file to export the theme in one namepsace.
+
+Example:
+
+```tsx
+// theme-exports.ts
+export const button = twux("text-white bg-blue-500 p-2 rounded", "button");
+export const title = twux("text-2xl font-bold", "h1");
+```
+
+```tsx
+// theme.ts
+export * as theme from "./theme-exports";
+```
+
+Usage:
+
+```tsx
+import { theme } from "./theme";
+
+<theme.button>Click me!</theme.button>
+<theme.title>Hello World</theme.title>
+```
+
+### Reasoning
+
+- **Object management is finicky**: Managing an object with names keys is more finicky than exporting a single `const` (e.g. bracket mismatches)
+- **Function and variable sharing**: Easy to create shared utility functions and shared variables that can be interspersed between the exports which can only be down before the `object` approach
+- **Selective exports**: Easy to selectively disable or enable exports from the theme without having to remove them from the object
+- **Additional exports**: Easy to export additional values as types

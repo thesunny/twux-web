@@ -5,6 +5,7 @@
   "scripts": {
     "-- start": "# start",
     "dev": "next dev --turbopack",
+    "open": "open http://localhost:3000",
     "start": "next start",
     "-- build": "# build",
     "build": "next build --turbopack",
@@ -14,6 +15,7 @@
     "-- end": "# end"
   },
   "dependencies": {
+    "@next/mdx": "^16.0.3",
     "next": "16.0.3",
     "nextra": "^4.6.0",
     "nextra-theme-docs": "^4.6.0",
