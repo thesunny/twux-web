@@ -2,6 +2,9 @@
 title: Hello
 ---
 
+import { twux } from "twux";
+import { table } from "@/src/table";
+
 # Tailwind User Experience
 
 Twux is a simple and powerful way to build re-usable type-safe React components
@@ -13,22 +16,15 @@ with Tailwind in a 2.5 KB library.
 const Button = twux("text-white bg-blue-500", "button");
 ```
 
-import { twux } from "twux";
-
 export const Button = twux("text-white bg-blue-500 p-2 rounded", "button");
-
-export const $table = twux("table-auto w-full my-4", "table");
-export const $tbody = twux("", "tbody");
-export const $tr = twux("", "tr");
-export const $td = twux("pr-4 pb-2 w-1/2", "td");
 
 Usage:
 
-<$table>
-  <$tbody>
+<table.root>
+  <table.tbody>
 
-<$tr>
-      <$td>
+<table.tr>
+      <table.td>
 
 {/* prettier-ignore */}
 ```tsx
@@ -37,14 +33,14 @@ Usage:
 </Button>
 ```
 
-      </$td>
-      <$td>
+      </table.td>
+      <table.td>
         <Button>Click me!</Button>
-      </$td>
-    </$tr>
+      </table.td>
+    </table.tr>
 
-<$tr>
-      <$td>
+<table.tr>
+      <table.td>
 
 {/* prettier-ignore */}
 ```tsx
@@ -54,14 +50,14 @@ Usage:
 </Button>
 ```
 
-      </$td>
-      <$td>
+      </table.td>
+      <table.td>
         <Button className="bg-gray-500">Click me!</Button>
-      </$td>
-    </$tr>
+      </table.td>
+    </table.tr>
 
-</$tbody>
-</$table>
+</table.tbody>
+</table.root>
 
 ### Variants
 
@@ -105,10 +101,10 @@ export const VariantButton = twux(
 
 Usage:
 
-<$table>
-<$tbody>
-<$tr>
-<$td>
+<table.root>
+<table.tbody>
+<table.tr>
+<table.td>
 
 {/* prettier-ignore */}
 ```tsx
@@ -117,14 +113,14 @@ Usage:
 </VariantButton>
 ```
 
-</$td>
-<$td>
+</table.td>
+<table.td>
 
   <VariantButton color="primary" size="md">Medium Primary Button</VariantButton>
-</$td>
-</$tr>
-<$tr>
-<$td>
+</table.td>
+</table.tr>
+<table.tr>
+<table.td>
 
 {/* prettier-ignore */}
 ```tsx
@@ -133,15 +129,15 @@ Usage:
 </VariantButton>
 ```
 
-</$td>
-<$td>
+</table.td>
+<table.td>
 
   <VariantButton color="gray" size="sm">Small Gray Button</VariantButton>
-</$td>
-</$tr>
+</table.td>
+</table.tr>
 
-</$tbody>
-</$table>
+</table.tbody>
+</table.root>
 
 Twux also supports [default values for a variant](./variants#default-values) to make a variant prop optional while still applying the corresponding classes.
 
@@ -171,10 +167,10 @@ export const BooleanButton = twux(
 
 Usage:
 
-<$table>
-<$tbody>
-<$tr>
-<$td>
+<table.root>
+<table.tbody>
+<table.tr>
+<table.td>
 
 {/* prettier-ignore */}
 ```tsx
@@ -183,15 +179,15 @@ Usage:
 </BooleanButton>
 ```
 
-</$td>
-<$td>
+</table.td>
+<table.td>
 
   <BooleanButton bold>Bold Button</BooleanButton>
-</$td>
-</$tr>
+</table.td>
+</table.tr>
 
-<$tr>
-<$td>
+<table.tr>
+<table.td>
 
 {/* prettier-ignore */}
 ```tsx
@@ -200,15 +196,15 @@ Usage:
 </BooleanButton>
 ```
 
-</$td>
-<$td>
+</table.td>
+<table.td>
 
   <BooleanButton italic>Italic Button</BooleanButton>
-</$td>
-</$tr>
+</table.td>
+</table.tr>
 
-</$tbody>
-</$table>
+</table.tbody>
+</table.root>
 
 Note: Boolean variants and option variants can be mixed and matched.
 
@@ -236,25 +232,25 @@ export const Chip = twux(
   }
 );
 
-<$table>
-<$tbody>
-<$tr>
-<$td>
+<table.root>
+<table.tbody>
+<table.tr>
+<table.td>
 
 {/* prettier-ignore */}
 ```tsx
 <Chip text="This is a chip" />
 ```
 
-</$td>
-<$td>
+</table.td>
+<table.td>
 
   <Chip text="This is a chip" />
-</$td>
-</$tr>
+</table.td>
+</table.tr>
 
-</$tbody>
-</$table>
+</table.tbody>
+</table.root>
 
 ### Enhance Existing Function Components
 
@@ -282,27 +278,31 @@ export const StyledLabel = twux(
 
 Usage:
 
-<$table>
-<$tbody>
-<$tr>
-<$td>
+<table.root>
+<table.tbody>
+<table.tr>
+<table.td>
 
 {/* prettier-ignore */}
 ```tsx
 <StyledLabel text="This is a styled label" />
 ```
 
-</$td>
-<$td>
+</table.td>
+<table.td>
 
   <StyledLabel text="This is a styled label" />
-</$td>
-</$tr>
+</table.td>
+</table.tr>
 
-</$tbody>
-</$table>
+</table.tbody>
+</table.root>
 
 ### Learn More...
+
+- [Variants in more detail](./variants)
+- [Building Libraries](./libraries)
+- [Frequently Asked Questions](./faq)
 
 And is easy to compose into mini libraries...
 

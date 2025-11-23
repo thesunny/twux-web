@@ -7,6 +7,8 @@ const meta: MetaRecord = {
   typescript: "TypeScript",
   "best-practices": "Best Practices",
   "libraries": "Building Libraries",
+  "tx": "tx Tailwind Merge Shortcut",
+  "faq": "Frequently Asked Questions",
 };
 
 export default meta;
