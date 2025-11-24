@@ -8,8 +8,39 @@ title: TypeScript
 
 Twux is built with TypeScript and provides full type safety for your components.
 
-## Type Inference
+## TypeScript for Function Components
 
-Twux automatically infers the props for the component based on the `tagName` argument.
+Twux can be used with function components by passing a function as the final argument.
 
-## Type Safety
+In order to get type safety with function components that extend HTML elements, you can use the `ElementProps` type from `twux` to get the props for the HTML element.
+
+This is an example of just passing props to the HTML element:
+
+```tsx
+import { type ELementProps, twux } from "twux";
+
+const Button = twux(
+  "text-white bg-red-500 p-2 rounded",
+  (props: ElementProps<"button">) => {
+    return <button {...props} />;
+  }
+);
+```
+
+To add custom props to the function component, use a type intersection to combine the `ElementProps` type with your own custom props.
+
+```tsx
+import { type ELementProps, twux } from "twux";
+
+const ButtonWithLabel = twux(
+  "text-white bg-red-500 p-2 rounded",
+  ({ label, ...props }: ElementProps<"button"> & { label: string }) => {
+    return (
+      <div>
+        <label>{label}</label>
+        <button {...props} />
+      </div>
+    );
+  }
+);
+```

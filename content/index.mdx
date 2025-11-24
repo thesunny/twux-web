@@ -3,7 +3,7 @@ title: Hello
 ---
 
 import { twux } from "twux";
-import { table } from "@/src/table";
+import { grid } from "@/src/grid";
 
 # Tailwind User Experience
 
@@ -20,11 +20,8 @@ export const Button = twux("text-white bg-blue-500 p-2 rounded", "button");
 
 Usage:
 
-<table.root>
-  <table.tbody>
-
-<table.tr>
-      <table.td>
+<grid.root>
+<grid.item>
 
 {/* prettier-ignore */}
 ```tsx
@@ -33,14 +30,11 @@ Usage:
 </Button>
 ```
 
-      </table.td>
-      <table.td>
-        <Button>Click me!</Button>
-      </table.td>
-    </table.tr>
-
-<table.tr>
-      <table.td>
+</grid.item>
+<grid.item>
+  <Button>Click me!</Button>
+</grid.item>
+<grid.item>
 
 {/* prettier-ignore */}
 ```tsx
@@ -50,14 +44,11 @@ Usage:
 </Button>
 ```
 
-      </table.td>
-      <table.td>
-        <Button className="bg-gray-500">Click me!</Button>
-      </table.td>
-    </table.tr>
-
-</table.tbody>
-</table.root>
+</grid.item>
+<grid.item>
+  <Button className="bg-gray-500">Click me!</Button>
+</grid.item>
+</grid.root>
 
 ### Variants
 
@@ -70,7 +61,7 @@ const VariantButton = twux(
     // color variant with two options
     color: {
       primary: "bg-blue-500",
-      danger: "bg-red-500",
+      gray: "bg-gray-500",
     },
     // size variant with three options
     size: {
@@ -101,10 +92,8 @@ export const VariantButton = twux(
 
 Usage:
 
-<table.root>
-<table.tbody>
-<table.tr>
-<table.td>
+<grid.root>
+<grid.item>
 
 {/* prettier-ignore */}
 ```tsx
@@ -113,14 +102,11 @@ Usage:
 </VariantButton>
 ```
 
-</table.td>
-<table.td>
-
+</grid.item>
+<grid.item>
   <VariantButton color="primary" size="md">Medium Primary Button</VariantButton>
-</table.td>
-</table.tr>
-<table.tr>
-<table.td>
+</grid.item>
+<grid.item>
 
 {/* prettier-ignore */}
 ```tsx
@@ -129,17 +115,13 @@ Usage:
 </VariantButton>
 ```
 
-</table.td>
-<table.td>
-
+</grid.item>
+<grid.item>
   <VariantButton color="gray" size="sm">Small Gray Button</VariantButton>
-</table.td>
-</table.tr>
+</grid.item>
+</grid.root>
 
-</table.tbody>
-</table.root>
-
-Twux also supports [default values for a variant](./variants#default-values) to make a variant prop optional while still applying the corresponding classes.
+Twux also supports [default values for variants](./variants#default-values).
 
 ### Boolean Variants
 
@@ -167,10 +149,8 @@ export const BooleanButton = twux(
 
 Usage:
 
-<table.root>
-<table.tbody>
-<table.tr>
-<table.td>
+<grid.root>
+<grid.item>
 
 {/* prettier-ignore */}
 ```tsx
@@ -179,15 +159,11 @@ Usage:
 </BooleanButton>
 ```
 
-</table.td>
-<table.td>
-
+</grid.item>
+<grid.item>
   <BooleanButton bold>Bold Button</BooleanButton>
-</table.td>
-</table.tr>
-
-<table.tr>
-<table.td>
+</grid.item>
+<grid.item>
 
 {/* prettier-ignore */}
 ```tsx
@@ -196,15 +172,11 @@ Usage:
 </BooleanButton>
 ```
 
-</table.td>
-<table.td>
-
+</grid.item>
+<grid.item>
   <BooleanButton italic>Italic Button</BooleanButton>
-</table.td>
-</table.tr>
-
-</table.tbody>
-</table.root>
+</grid.item>
+</grid.root>
 
 Note: Boolean variants and option variants can be mixed and matched.
 
@@ -232,25 +204,19 @@ export const Chip = twux(
   }
 );
 
-<table.root>
-<table.tbody>
-<table.tr>
-<table.td>
+<grid.root>
+<grid.item>
 
 {/* prettier-ignore */}
 ```tsx
 <Chip text="This is a chip" />
 ```
 
-</table.td>
-<table.td>
-
+</grid.item>
+<grid.item>
   <Chip text="This is a chip" />
-</table.td>
-</table.tr>
-
-</table.tbody>
-</table.root>
+</grid.item>
+</grid.root>
 
 ### Enhance Existing Function Components
 
@@ -278,48 +244,24 @@ export const StyledLabel = twux(
 
 Usage:
 
-<table.root>
-<table.tbody>
-<table.tr>
-<table.td>
+<grid.root>
+<grid.item>
 
 {/* prettier-ignore */}
 ```tsx
 <StyledLabel text="This is a styled label" />
 ```
 
-</table.td>
-<table.td>
+</grid.item>
+<grid.item>
 
   <StyledLabel text="This is a styled label" />
-</table.td>
-</table.tr>
 
-</table.tbody>
-</table.root>
+</grid.item>
+</grid.root>
 
 ### Learn More...
 
 - [Variants in more detail](./variants)
 - [Building Libraries](./libraries)
 - [Frequently Asked Questions](./faq)
-
-And is easy to compose into mini libraries...
-
-```tsx
-const MyForm = {
-  Button: twux("text-white bg-blue-500", "button"),
-  Input: twux("border text-sm", "input"),
-  Group: twux("p-4", "div"),
-};
-```
-
-Automatically handles
-
-- Tailwind `className` merging with `tailwind-merge`
-- Adding `forwardRef` to components
-
-Everything is TypeScript first
-
-- Creates HTML based components with typed `props` based on the tag name like `button` so you don't have to remember to type `(props: React.ButtonHTMLAttributes<HTMLButtonElemeent>)`
-- Extracts and uses typed `props` from Function Components
